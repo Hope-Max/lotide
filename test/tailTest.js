@@ -1,32 +1,26 @@
-const assertEqual = require('../assertEqual');
+const chai = require('chai');
+const assert = chai.assert;
 const tail = require('../tail');
 
-
-const array1 = ["Hello", "Lighthouse", "Labs"];
-console.log(tail(array1));
-console.log(array1);
-assertEqual(tail(array1).length, 2);
-assertEqual(tail(array1)[0], 'Lighthouse');
-assertEqual(tail(array1)[1], 'Labs');
-
-
-const array2 = [1, 2, 3, 4, 5];
-console.log(tail(array2));
-console.log(array2);
-assertEqual(tail(array2).length, 4);
-assertEqual(tail(array2)[0], 2);
-assertEqual(tail(array2)[1], 3);
-assertEqual(tail(array2)[2], 4);
-assertEqual(tail(array2)[3], 5);
-
-const array3 = ['Max'];
-console.log(tail(array3));
-console.log(array3);
-assertEqual(tail(array3).length, 0);
-assertEqual(tail(array3)[0], undefined);
-
-const array4 = [];
-console.log(tail(array4));
-console.log(array4);
-assertEqual(tail(array4).length, 0);
-assertEqual(tail(array4)[0], undefined);
+describe('#tail', function() {
+  it("should return ['Lighthouse', 'Labs'] when the input is ['Hello', 'Lighthouse', 'Labs']", function() {
+    const input = ['Hello', 'Lighthouse', 'Labs'];
+    const result = tail(input);
+    assert.deepEqual(result, ['Lighthouse', 'Labs']);
+  });
+  it('should return [2, 3, 4, 5] when the input is [1, 2, 3, 4, 5]', function() {
+    const input = [1, 2, 3, 4, 5];
+    const result = tail(input);
+    assert.deepEqual(result, [2, 3, 4, 5]);
+  });
+  it("should return [] when the input is ['Max']", function() {
+    const input = ['Max'];
+    const result = tail(input);
+    assert.deepEqual(result, []);
+  });
+  it("should return [] when the input is []", function() {
+    const input = [];
+    const result = tail(input);
+    assert.deepEqual(result, []);
+  });
+});
